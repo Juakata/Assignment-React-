@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import Message from '../components/Message';
 
-const MessagesList = ({ messages }) => {
-  const emptyMessages = (
-    <p>There are not messages here.</p>
-  );
+class MessagesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openWindow: false,
+    };
+  }
 
-  const getHumanTime = interval => {
+  openWindow = () => {
+    this.setState(state => ({
+      openWindow: !state.openWindow,
+    }));
+  }
+
+  getHumanTime = interval => {
     const duration = moment.duration(interval);
     let result = '';
     const h = duration.hours() < 10 ? `0${duration.hours()}` : duration.hours();
@@ -24,21 +33,28 @@ const MessagesList = ({ messages }) => {
     return result;
   };
 
-  const messagesList = (
-    <div>
-      {messages.map(msg => {
-        const duration = getHumanTime(msg.duration);
-        return <Message key={msg.id} msg={msg} duration={duration} />;
-      })}
-    </div>
-  );
+  render() {
+    const { messages } = this.props;
+    const emptyMessages = (
+      <p>There are not messages here.</p>
+    );
 
-  return (
-    <div>
-      {messages.length === 0 ? emptyMessages : messagesList}
-    </div>
-  );
-};
+    const messagesList = (
+      <div>
+        {messages.map(msg => {
+          const duration = this.getHumanTime(msg.duration);
+          return <Message key={msg.id} msg={msg} duration={duration} />;
+        })}
+      </div>
+    );
+
+    return (
+      <div>
+        {messages.length === 0 ? emptyMessages : messagesList}
+      </div>
+    );
+  }
+}
 
 MessagesList.propTypes = {
   messages: PropTypes.instanceOf(Object).isRequired,
