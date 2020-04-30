@@ -1,31 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchMessages } from '../actions/index';
+import Message from '../components/Message';
 
-class Groups extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      test: 'test',
-    };
-  }
-
+class VoicemailMessages extends React.Component {
   componentDidMount() {
-    fetch('https://still-retreat-45947.herokuapp.com/api/v1/pullvoicemails/1/2')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(() => {});
+    const { fetchMessages } = this.props;
+    fetchMessages();
   }
 
   render() {
-    const { test } = this.state;
+    const { messages } = this.props;
+
     return (
       <div className="container">
-        <span>{test}</span>
+        <Message messages={messages} />
       </div>
     );
   }
 }
 
-export default connect(null, null)(Groups);
+VoicemailMessages.propTypes = {
+  fetchMessages: PropTypes.func.isRequired,
+  messages: PropTypes.instanceOf(Object).isRequired,
+};
+
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchMessages: () => dispatch(fetchMessages()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VoicemailMessages);

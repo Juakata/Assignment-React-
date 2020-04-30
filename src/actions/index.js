@@ -1,8 +1,17 @@
-const ADD_MESSAGE = 'ADD_MESSAGE';
+const SERVER = 'https://still-retreat-45947.herokuapp.com/api/v1/';
+export const SET_MESSAGES = 'SET_MESSAGES';
 
-const addMessage = messages => ({
-  type: ADD_MESSAGE,
+const setMessages = messages => ({
+  type: SET_MESSAGES,
   messages,
 });
 
-export default { addMessage };
+const fetchMessages = () => (
+  dispatch => {
+    fetch(`${SERVER}pullvoicemails/1/2`)
+      .then(res => res.json())
+      .then(data => dispatch(setMessages(data.voicemails)));
+  }
+);
+
+export { fetchMessages, setMessages };
