@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Message = ({ msg }) => {
+const Message = ({ msg, duration }) => {
   const {
-    status, to, from, duration,
+    status, to, from,
   } = msg;
   return (
     <div className="message-container">
@@ -17,6 +17,7 @@ const Message = ({ msg }) => {
 
 Message.propTypes = {
   msg: PropTypes.instanceOf(Object).isRequired,
+  duration: PropTypes.string.isRequired,
 };
 
 export default Message;
