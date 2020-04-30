@@ -7,8 +7,8 @@ import Header from '../containers/Header';
 function App() {
   return (
     <div className="app-container">
-      <Header />
       <BrowserRouter>
+        <Header />
         <Switch>
           <Route exact path="/" render={() => <Selector />} />
           <Route exact path="/list" render={() => <VoicemailMessages />} />

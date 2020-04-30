@@ -15,6 +15,7 @@ body {
   font-size: 20px;
   box-shadow: 0 0 5px black;
   font-weight: bold;
+  position: relative;
 }
 
 .message-container {
@@ -97,4 +98,12 @@ body {
 .btn-deleted:hover {
   background: white;
   color: red;
+}
+
+.back-link {
+  color: white;
+  position: absolute;
+  top: 15px;
+  left: 25px;
+  font-weight: bolder;
 }
