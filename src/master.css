@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.my-header {
+  background: #3167ad;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  font-size: 17px;
+  box-shadow: 0 0 5px black;
+  font-weight: bold;
+}

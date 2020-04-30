@@ -1,11 +1,12 @@
 import React from 'react';
+import VoicemailMessages from '../containers/VoicemailMessages';
+import Header from '../containers/Header';
 
 function App() {
   return (
     <div className="app-container">
-      <header className="App-header">
-        <p>React App </p>
-      </header>
+      <Header />
+      <VoicemailMessages />
     </div>
   );
 }
