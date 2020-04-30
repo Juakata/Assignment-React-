@@ -7,7 +7,11 @@ const Message = ({ msg, duration, handleWindow }) => {
   } = msg;
   return (
     <div className="message-container">
-      <button onClick={handleWindow} type="button" className="btn-status">
+      <button
+        onClick={handleWindow}
+        type="button"
+        className={`btn-status btn-${status}`}
+      >
         {status}
       </button>
       <h3>{`To: ${to}`}</h3>

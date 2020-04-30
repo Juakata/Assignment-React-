@@ -39,11 +39,13 @@ body {
   color: white;
   background: RGBA(49, 103, 173, .8);
   font-size: 15px;
+  text-shadow: 1px 1px 1px black;
 }
 
 .btn-status:hover {
   color: RGB(49, 103, 173);
   background: white;
+  text-shadow: none;
 }
 
 .cover {
@@ -71,15 +73,15 @@ body {
 }
 
 .btn-new {
-  background: blue;
+  background: RGBA(0, 65, 150, .8);
 }
 
 .btn-saved {
-  background: green;
+  background: RGBA(0, 153, 25, .8);
 }
 
 .btn-deleted {
-  background: red;
+  background: RGBA(150, 0, 10, .8);
 }
 
 .btn-new:hover {
