@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchMainuser } from '../actions/index';
+import { fetchMainuser, removeFromBack } from '../actions/index';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -10,14 +10,24 @@ class Header extends React.Component {
     fetchMainuser();
   }
 
+  goBack = () => {
+    const { removeFromBack, history } = this.props;
+    history.push('/');
+    removeFromBack('list');
+  }
+
   render() {
     const { mainuser, back } = this.props;
     return (
       <header className="my-header">
-        {back && (
-          <Link className="back-link" to="/">
+        {back.length > 0 && (
+          <button
+            onClick={() => this.goBack()}
+            className="back-btn"
+            type="button"
+          >
             <i className="fas fa-arrow-left" />
-          </Link>
+          </button>
         )}
         <span>{`Welcome ${mainuser}!`}</span>
       </header>
@@ -28,6 +38,8 @@ Header.propTypes = {
   fetchMainuser: PropTypes.func.isRequired,
   mainuser: PropTypes.string.isRequired,
   back: PropTypes.bool.isRequired,
+  removeFromBack: PropTypes.bool.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -37,6 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchMainuser: () => dispatch(fetchMainuser()),
+  removeFromBack: page => dispatch(removeFromBack(page)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

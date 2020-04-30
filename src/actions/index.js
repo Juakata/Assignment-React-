@@ -2,6 +2,18 @@ const SERVER = 'https://still-retreat-45947.herokuapp.com/api/v1/';
 export const SET_MESSAGES = 'SET_MESSAGES';
 export const SET_MAINUSER = 'SET_MAINUSER';
 export const UPDATE_STATUS_MSG = 'UPDATE_STATUS_MSG';
+export const ADD_TO_BACK = 'ADD_TO_BACK';
+export const REMOVE_FROM_BACK = 'REMOVE_FROM_BACK';
+
+const addToBack = page => ({
+  type: ADD_TO_BACK,
+  page,
+});
+
+const removeFromBack = page => ({
+  type: REMOVE_FROM_BACK,
+  page,
+});
 
 const setMessages = messages => ({
   type: SET_MESSAGES,
@@ -46,5 +58,5 @@ const fetchMainuser = () => (
 
 export {
   fetchMessages, setMessages, setMainuser, fetchMainuser, updateStatusMsg,
-  fetchUpdateMessage,
+  fetchUpdateMessage, addToBack, removeFromBack,
 };
