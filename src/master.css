@@ -3,6 +3,10 @@ body {
   padding: 0;
 }
 
+* {
+  outline: none;
+}
+
 .my-header {
   background: #3167ad;
   color: #ffffff;
@@ -29,6 +33,7 @@ body {
 
 .btn-status {
   width: 10%;
+  min-width: 50px;
   border-radius: 10px;
   cursor: pointer;
   color: white;
