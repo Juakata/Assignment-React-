@@ -1,34 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchMainuser } from '../actions/index';
 
-class Groups extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-    };
-  }
-
+class Header extends React.Component {
   componentDidMount() {
-    fetch('https://still-retreat-45947.herokuapp.com/api/v1/pullusermail/Andoni')
-      .then(response => response.json())
-      .then(data => {
-        const { name } = data.usermail;
-        this.setState({
-          name,
-        });
-      })
-      .catch(() => {});
+    const { fetchMainuser } = this.props;
+    fetchMainuser();
   }
 
   render() {
-    const { name } = this.state;
+    const { mainuser } = this.props;
     return (
       <header className="my-header">
-        <span>{`Welcome ${name}!`}</span>
+        <span>{`Welcome ${mainuser}!`}</span>
       </header>
     );
   }
 }
+Header.propTypes = {
+  fetchMainuser: PropTypes.func.isRequired,
+  mainuser: PropTypes.string.isRequired,
+};
 
-export default connect(null, null)(Groups);
+const mapStateToProps = state => ({
+  mainuser: state.mainuser,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchMainuser: () => dispatch(fetchMainuser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
