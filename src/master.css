@@ -45,3 +45,54 @@ body {
   color: RGB(49, 103, 173);
   background: white;
 }
+
+.cover {
+  background: RGBA(0, 0, 0, .8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cover button{
+  width: 40%;
+  margin: 10px;
+  padding: 10px;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-new {
+  background: blue;
+}
+
+.btn-saved {
+  background: green;
+}
+
+.btn-deleted {
+  background: red;
+}
+
+.btn-new:hover {
+  background: white;
+  color: blue;
+}
+
+.btn-saved:hover {
+  background: white;
+  color: green;
+}
+
+.btn-deleted:hover {
+  background: white;
+  color: red;
+}
