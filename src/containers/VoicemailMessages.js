@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../actions/index';
-import Message from '../components/Message';
+import MessagesList from './MessagesList';
 
 class VoicemailMessages extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class VoicemailMessages extends React.Component {
 
     return (
       <div className="container">
-        <Message messages={messages} />
+        <MessagesList messages={messages} />
       </div>
     );
   }

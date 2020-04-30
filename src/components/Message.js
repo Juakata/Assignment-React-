@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Message = ({ messages }) => {
-  const emptyMessages = (
-    <p>There are not messages here.</p>
-  );
-
-  const messagesList = (
-    <div>
-      {messages.map(msg => <div key={msg.id}>{msg.duration}</div>)}
-    </div>
-  );
-
+const Message = ({ msg }) => {
+  const {
+    status, to, from, duration,
+  } = msg;
   return (
-    <div>
-      {messages.length === 0 ? emptyMessages : messagesList}
+    <div className="message-container">
+      <button type="button" className="btn-status">{status}</button>
+      <h3>{`To: ${to}`}</h3>
+      <h3>{`From: ${from}`}</h3>
+      <h3>{`${duration}`}</h3>
     </div>
   );
 };
 
 Message.propTypes = {
-  messages: PropTypes.instanceOf(Object).isRequired,
+  msg: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Message;

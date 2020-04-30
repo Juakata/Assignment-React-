@@ -10,7 +10,7 @@ const fetchMessages = () => (
   dispatch => {
     fetch(`${SERVER}pullvoicemails/1/2`)
       .then(res => res.json())
-      .then(data => dispatch(setMessages(data.voicemails)));
+      .then(data => dispatch(setMessages(data.messages)));
   }
 );
 
