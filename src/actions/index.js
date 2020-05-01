@@ -4,6 +4,7 @@ export const SET_MAINUSER = 'SET_MAINUSER';
 export const UPDATE_STATUS_MSG = 'UPDATE_STATUS_MSG';
 export const ADD_TO_BACK = 'ADD_TO_BACK';
 export const REMOVE_FROM_BACK = 'REMOVE_FROM_BACK';
+export const SET_MAILUSERS = 'SET_MAILUSERS';
 
 const addToBack = page => ({
   type: ADD_TO_BACK,
@@ -31,6 +32,11 @@ const setMainuser = name => ({
   name,
 });
 
+const setMailusers = mailusers => ({
+  type: SET_MAILUSERS,
+  mailusers,
+});
+
 const fetchUpdateMessage = obj => (
   dispatch => {
     const { id, index, status } = obj;
@@ -56,7 +62,15 @@ const fetchMainuser = () => (
   }
 );
 
+const fetchMailusers = current => (
+  dispatch => {
+    fetch(`${SERVER}pullmailusers/${current}`)
+      .then(res => res.json())
+      .then(data => dispatch(setMailusers(data.mailusers)));
+  }
+);
+
 export {
   fetchMessages, setMessages, setMainuser, fetchMainuser, updateStatusMsg,
-  fetchUpdateMessage, addToBack, removeFromBack,
+  fetchUpdateMessage, addToBack, removeFromBack, fetchMailusers,
 };

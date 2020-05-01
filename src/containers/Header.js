@@ -37,8 +37,8 @@ class Header extends React.Component {
 Header.propTypes = {
   fetchMainuser: PropTypes.func.isRequired,
   mainuser: PropTypes.string.isRequired,
-  back: PropTypes.bool.isRequired,
-  removeFromBack: PropTypes.bool.isRequired,
+  back: PropTypes.instanceOf(Object).isRequired,
+  removeFromBack: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 };
 
