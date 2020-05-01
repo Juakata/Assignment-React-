@@ -54,7 +54,6 @@ const fetchUpdateMessage = obj => (
 
 const fetchMessages = sender => (
   dispatch => {
-    console.log(sender);
     fetch(`${SERVER}pullvoicemails/1/${sender}`)
       .then(res => res.json())
       .then(data => dispatch(setMessages(data.messages)));

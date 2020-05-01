@@ -46,21 +46,24 @@ class Selector extends React.Component {
     const { sender, windowOpen } = this.state;
     const { mailusers } = this.props;
     const mailusersList = mailusers.map(user => (
-      <li
+      <div
         onClick={() => this.changePerson(user.name, user.id)}
+        onKeyDown={this.handleClick}
+        tabIndex={0}
+        role="button"
         key={user.id}
       >
         {user.name}
-      </li>
+      </div>
     ));
     return (
       <div className="cont-center">
         <button onClick={() => this.handleWindow()} type="button" className="btn-selector">
           {sender}
           {windowOpen && (
-            <ul className="person-ul-selector">
+            <div className="person-selector-container">
               {mailusersList}
-            </ul>
+            </div>
           )}
         </button>
         <button
