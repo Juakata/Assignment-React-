@@ -32,14 +32,17 @@ class Selector extends React.Component {
 
   render() {
     const { sender, windowOpen } = this.state;
+    const { mailusers } = this.props;
+    const mailusersList = mailusers.map(user => (
+      <li key={user.id}>{user.name}</li>
+    ));
     return (
       <div className="cont-center">
         <button onClick={() => this.handleWindow()} type="button" className="btn-selector">
           {sender}
           {windowOpen && (
             <ul className="person-ul-selector">
-              <li>Hector</li>
-              <li>Alejandro</li>
+              {mailusersList}
             </ul>
           )}
         </button>
@@ -59,11 +62,16 @@ Selector.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   addToBack: PropTypes.func.isRequired,
   fetchMailusers: PropTypes.func.isRequired,
+  mailusers: PropTypes.instanceOf(Object).isRequired,
 };
+
+const mapStateToProps = state => ({
+  mailusers: state.mailusers,
+});
 
 const mapDispatchToProps = dispatch => ({
   addToBack: page => dispatch(addToBack(page)),
   fetchMailusers: mainuser => dispatch(fetchMailusers(mainuser)),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(Selector));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Selector));
