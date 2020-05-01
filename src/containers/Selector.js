@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { addToBack, fetchMailusers } from '../actions/index';
+import { addToBack, fetchMailusers, setCurrentSender } from '../actions/index';
 
 class Selector extends React.Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Selector extends React.Component {
     this.state = {
       sender: 'Select Person',
       windowOpen: false,
+      id: -1,
     };
   }
 
@@ -19,9 +20,20 @@ class Selector extends React.Component {
   }
 
   seeMessages = () => {
-    const { history, addToBack } = this.props;
-    history.push('/list');
-    addToBack('list');
+    const { history, addToBack, setCurrentSender } = this.props;
+    const { id } = this.state;
+    if (id !== -1) {
+      history.push('/list');
+      addToBack('list');
+      setCurrentSender(id);
+    }
+  }
+
+  changePerson = (name, id) => {
+    this.setState({
+      sender: name,
+      id,
+    });
   }
 
   handleWindow = () => {
@@ -34,7 +46,12 @@ class Selector extends React.Component {
     const { sender, windowOpen } = this.state;
     const { mailusers } = this.props;
     const mailusersList = mailusers.map(user => (
-      <li key={user.id}>{user.name}</li>
+      <li
+        onClick={() => this.changePerson(user.name, user.id)}
+        key={user.id}
+      >
+        {user.name}
+      </li>
     ));
     return (
       <div className="cont-center">
@@ -63,6 +80,7 @@ Selector.propTypes = {
   addToBack: PropTypes.func.isRequired,
   fetchMailusers: PropTypes.func.isRequired,
   mailusers: PropTypes.instanceOf(Object).isRequired,
+  setCurrentSender: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -72,6 +90,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addToBack: page => dispatch(addToBack(page)),
   fetchMailusers: mainuser => dispatch(fetchMailusers(mainuser)),
+  setCurrentSender: id => dispatch(setCurrentSender(id)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Selector));

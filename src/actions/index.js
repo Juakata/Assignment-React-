@@ -5,6 +5,7 @@ export const UPDATE_STATUS_MSG = 'UPDATE_STATUS_MSG';
 export const ADD_TO_BACK = 'ADD_TO_BACK';
 export const REMOVE_FROM_BACK = 'REMOVE_FROM_BACK';
 export const SET_MAILUSERS = 'SET_MAILUSERS';
+export const SET_CURRENT_SENDER = 'SET_CURRENT_SENDER';
 
 const addToBack = page => ({
   type: ADD_TO_BACK,
@@ -32,6 +33,11 @@ const setMainuser = name => ({
   name,
 });
 
+const setCurrentSender = id => ({
+  type: SET_CURRENT_SENDER,
+  id,
+});
+
 const setMailusers = mailusers => ({
   type: SET_MAILUSERS,
   mailusers,
@@ -46,9 +52,10 @@ const fetchUpdateMessage = obj => (
   }
 );
 
-const fetchMessages = () => (
+const fetchMessages = sender => (
   dispatch => {
-    fetch(`${SERVER}pullvoicemails/1/2`)
+    console.log(sender);
+    fetch(`${SERVER}pullvoicemails/1/${sender}`)
       .then(res => res.json())
       .then(data => dispatch(setMessages(data.messages)));
   }
@@ -72,5 +79,5 @@ const fetchMailusers = current => (
 
 export {
   fetchMessages, setMessages, setMainuser, fetchMainuser, updateStatusMsg,
-  fetchUpdateMessage, addToBack, removeFromBack, fetchMailusers,
+  fetchUpdateMessage, addToBack, removeFromBack, fetchMailusers, setCurrentSender,
 };
